@@ -1,0 +1,8 @@
+{
+    "nom": "John Doe",
+    "prenom": "John",
+    "dateNaissance": "1990-01-01",
+    "taille": "180 cm",
+    "poids": "70 kg",
+    "age": "32 ans"
+  }
