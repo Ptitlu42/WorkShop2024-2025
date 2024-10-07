@@ -46,3 +46,26 @@ function redirect_to_glucometre() {
 function redirect_to_balance() {
   window.location.href = "balance.html";
 }
+
+function redirect_to_resultats() {
+  window.location.href = "resultats.html";
+}
+
+fetch('../data/informations.json')
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('nom').innerHTML = data.nom;
+    document.getElementById('prenom').innerHTML = data.prenom;
+    document.getElementById('dateNaissance').innerHTML = data.dateNaissance;
+    document.getElementById('taille').innerHTML = data.taille;
+    document.getElementById('poids').innerHTML = data.poids;
+    document.getElementById('age').innerHTML = data.age;
+  });
+
+function imprimerResultats() {
+  window.print();
+}
+
+function notifierMedecin() {
+  alert("Résultats envoyés au medecin");
+}
