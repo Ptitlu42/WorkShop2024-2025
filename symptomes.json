@@ -1,0 +1,311 @@
+[
+    {
+      "id": 1,
+      "nom": "Fièvre"
+    },
+    {
+      "id": 2,
+      "nom": "Toux"
+    },
+    {
+      "id": 3,
+      "nom": "Maux de tête"
+    },
+    {
+      "id": 4,
+      "nom": "Fatigue"
+    },
+    {
+      "id": 5,
+      "nom": "Douleurs articulaires"
+    },
+    {
+      "id": 6,
+      "nom": "Nausées"
+    },
+    {
+      "id": 7,
+      "nom": "Diarrhée"
+    },
+    {
+      "id": 8,
+      "nom": "Constipation"
+    },
+    {
+      "id": 9,
+      "nom": "Maux de ventre"
+    },
+    {
+      "id": 10,
+      "nom": "Essoufflement"
+    },
+    {
+      "id": 11,
+      "nom": "Maux de gorge"
+    },
+    {
+      "id": 12,
+      "nom": "Écoulement nasal"
+    },
+    {
+      "id": 13,
+      "nom": "Congestion nasale"
+    },
+    {
+      "id": 14,
+      "nom": "Éternuements"
+    },
+    {
+      "id": 15,
+      "nom": "Yeux rouges"
+    },
+    {
+      "id": 16,
+      "nom": "Écoulement oculaire"
+    },
+    {
+      "id": 17,
+      "nom": "Maux de dos"
+    },
+    {
+      "id": 18,
+      "nom": "Douleurs musculaires"
+    },
+    {
+      "id": 19,
+      "nom": "Faiblesse musculaire"
+    },
+    {
+      "id": 20,
+      "nom": "Tremblements"
+    },
+    {
+      "id": 21,
+      "nom": "Spasmes"
+    },
+    {
+      "id": 22,
+      "nom": "Crampes"
+    },
+    {
+      "id": 23,
+      "nom": "Maux de jambes"
+    },
+    {
+      "id": 24,
+      "nom": "Douleurs à la poitrine"
+    },
+    {
+      "id": 25,
+      "nom": "Palpitations"
+    },
+    {
+      "id": 26,
+      "nom": "Bouffées de chaleur"
+    },
+    {
+      "id": 27,
+      "nom": "Sueurs froides"
+    },
+    {
+      "id": 28,
+      "nom": "Perte d'appétit"
+    },
+    {
+      "id": 29,
+      "nom": "Perte de poids"
+    },
+    {
+      "id": 30,
+      "nom": "Gain de poids"
+    },
+    {
+      "id": 31,
+      "nom": "Insomnie"
+    },
+    {
+      "id": 32,
+      "nom": "Somnolence"
+    },
+    {
+      "id": 33,
+      "nom": "Troubles de la concentration"
+    },
+    {
+      "id": 34,
+      "nom": "Troubles de la mémoire"
+    },
+    {
+      "id": 35,
+      "nom": "Irritabilité"
+    },
+    {
+      "id": 36,
+      "nom": "Anxiété"
+    },
+    {
+      "id": 37,
+      "nom": "Dépression"
+    },
+    {
+      "id": 38,
+      "nom": "Maux de dents"
+    },
+    {
+      "id": 39,
+      "nom": "Gingivite"
+    },
+    {
+      "id": 40,
+      "nom": "Maux de bouche"
+    },
+    {
+      "id": 41,
+      "nom": "Aphtes"
+    },
+    {
+      "id": 42,
+      "nom": "Maux de langue"
+    },
+    {
+      "id": 43,
+      "nom": "Troubles du goût"
+    },
+    {
+      "id": 44,
+      "nom": "Troubles de l'odorat"
+    },
+    {
+      "id": 45,
+      "nom": "Perte de cheveux"
+    },
+    {
+      "id": 46,
+      "nom": "Chute de cheveux"
+    },
+    {
+      "id": 47,
+      "nom": "Rash cutané"
+    },
+    {
+      "id": 48,
+      "nom": "Démangeaisons"
+    },
+    {
+      "id": 49,
+      "nom": "Éruptions cutanées"
+    },
+    {
+        "id": 50,
+        "nom": "Pustules"
+    },
+    {
+        "id": 51,
+        "nom": "Vésicules"
+    },
+    {
+        "id": 52,
+        "nom": "Boursouflures"
+    },
+    {
+        "id": 53,
+        "nom": "Coupures"
+    },
+    {
+        "id": 54,
+        "nom": "Écorchures"
+    },
+    {
+        "id": 55,
+        "nom": "Hématomes"
+    },
+    {
+        "id": 56,
+        "nom": "Perte de sang"
+    },
+    {
+        "id": 57,
+        "nom": "Saignements de nez"
+    },
+    {
+        "id": 58,
+        "nom": "Saignements de bouche"
+    },
+    {
+        "id": 59,
+        "nom": "Saignements de rectum"
+    },
+    {
+        "id": 60,
+        "nom": "Saignements vaginaux"
+    },
+    {
+        "id": 61,
+        "nom": "Maux de reins"
+    },
+    {
+        "id": 62,
+        "nom": "Maux de foie"
+    },
+    {
+        "id": 63,
+        "nom": "Maux de pancréas"
+    },
+    {
+        "id": 64,
+        "nom": "Maux de rate"
+    },
+    {
+        "id": 65,
+        "nom": "Maux de thymus"
+    },
+    {
+        "id": 66,
+        "nom": "Maux de thyroïde"
+    },
+    {
+        "id": 67,
+        "nom": "Maux d'ovaires"
+    },
+    {
+        "id": 68,
+        "nom": "Maux de testicules"
+    },
+    {
+        "id": 69,
+        "nom": "Maux de prostate"
+    },
+    {
+        "id": 70,
+        "nom": "Maux d'utérus"
+    },
+    {
+        "id": 71,
+        "nom": "Maux de vagin"
+    },
+    {
+        "id": 72,
+        "nom": "Maux de vulve"
+    },
+    {
+        "id": 73,
+        "nom": "Maux de pénis"
+    },
+    {
+        "id": 74,
+        "nom": "Maux de scrotum"
+    },
+    {
+        "id": 75,
+        "nom": "Maux de colon"
+    },
+    {
+        "id": 76,
+        "nom": "Maux de rectum"
+    },
+    {
+        "id": 77,
+        "nom": "Maux de peau"
+    }
+]
+
