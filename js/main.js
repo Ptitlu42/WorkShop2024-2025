@@ -1,8 +1,8 @@
 function redirect_to_informations() {
-  window.location.href = "informations.html";
+  window.location.href = "../html/informations.html";
 }
 
-fetch("informations.json")
+fetch("../data/informations.json")
   .then((response) => response.json())
   .then((data) => {
     document.getElementById("nom").innerHTML = data.nom;
@@ -14,10 +14,10 @@ fetch("informations.json")
   });
 
 function redirect_to_symptomes() {
-  window.location.href = "symptomes.html";
+  window.location.href = "../html/symptomes.html";
 }
 
-fetch('symptomes.json')
+fetch('../data/symptomes.json')
   .then(response => response.json())
   .then(data => {
     const symptomes = document.getElementById('symptomes');
@@ -30,3 +30,19 @@ fetch('symptomes.json')
       symptomes.appendChild(li);
     });
   });
+
+function redirect_to_thermometre() {
+  window.location.href = "thermometre.html";
+}
+
+function redirect_to_stethoscope() {
+  window.location.href = "stethoscope.html";
+}
+
+function redirect_to_glucometre() {
+  window.location.href = "glucometre.html";
+}
+
+function redirect_to_balance() {
+  window.location.href = "balance.html";
+}
