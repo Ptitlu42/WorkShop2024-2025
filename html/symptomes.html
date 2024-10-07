@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html class="scroll-smooth" lang="fr">
-    <head>
-        <title>Borne</title>
-        <meta charset="utf-8">
-        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="../css/main.css">
-        <script src="../js/main.js"></script>
-    </head>
-    <body class="bg-gradient-to-r from-gray-50 to-green-100">
-    <div class="container mx-auto p-4 pt-24">
-      <h2 class="text-4xl text-center font-bold">Vos symptômes</h2>
-      <p class="text-3xl text-center pt-12">Veuillez cocher les symptômes que vous ressentez</p>
-      <div class="flex flex-col justify-center items-center mt-12">
-        <div class="flex flex-col w-full sm:w-1/2 p-4 bg-white rounded-lg shadow-lg overflow-y-scroll h-96">
-          <ul id="symptomes">
-          </ul>
-        </div>
-        <div class="flex flex-col w-full sm:w-1/2 mt-4">
-          <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full" id="suivant" onclick="redirect_to_thermometre()">Suivant</button>
-        </div>
+
+<head>
+  <title>Borne</title>
+  <meta charset="utf-8">
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="../js/main.js"></script>
+</head>
+
+<body class="bg-gradient-to-r from-gray-50 to-green-100">
+  <div class="container mx-auto p-4 pt-24">
+    <h2 class="text-4xl text-center font-bold">Vos symptômes</h2>
+    <p class="text-3xl text-center pt-12">Veuillez cocher les symptômes que vous ressentez</p>
+    <div class="flex flex-col justify-center items-center mt-12">
+      <div class="flex flex-col w-full sm:w-1/2 p-4 bg-white rounded-lg shadow-lg overflow-y-scroll h-96">
+        <ul id="symptomes">
+        </ul>
+      </div>
+      <div class="flex flex-col w-full sm:w-1/2 mt-4">
+        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full" id="suivant"
+          onclick="redirect_to_thermometre()">Suivant</button>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
+</html>
