@@ -86,3 +86,21 @@ function afficherSymptomesCoches() {
     console.log("L'élément symptomes-coches n'est pas disponible");
   }
 }
+
+fetch('https://cors-anywhere.herokuapp.com/https://api.disease-ontology.org/api/v2/diseases')
+  .then(response => response.json())
+  .then(data => {
+    const diseasesElement = document.getElementById('diseases');
+
+    data.forEach(disease => {
+      const diseaseElement = document.createElement('div');
+      diseaseElement.innerHTML = `
+        <h2>${disease.name}</h2>
+        <ul>
+          ${disease.symptoms.map(symptom => `<li>${symptom}</li>`).join('')}
+        </ul>
+      `;
+      diseasesElement.appendChild(diseaseElement);
+    });
+  })
+  .catch(error => console.error(error));
