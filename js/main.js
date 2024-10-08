@@ -69,3 +69,20 @@ function imprimerResultats() {
 function notifierMedecin() {
   alert("Résultats envoyés au medecin");
 }
+
+function afficherSymptomesCoches() {
+  const symptomesCoches = JSON.parse(localStorage.getItem('symptomesCoches'));
+  const symptomesCochesDiv = document.getElementById('symptomes-coches');
+
+  if (symptomesCochesDiv) {
+    if (symptomesCoches) {
+      symptomesCoches.forEach((symptome) => {
+        const p = document.createElement('p');
+        p.textContent = symptome;
+        symptomesCochesDiv.appendChild(p);
+      });
+    }
+  } else {
+    console.log("L'élément symptomes-coches n'est pas disponible");
+  }
+}
