@@ -86,7 +86,6 @@ function afficherSymptomesCoches() {
     console.log("L'élément symptomes-coches n'est pas disponible");
   }
 }
-
 fetch('https://cors-anywhere.herokuapp.com/https://api.disease-ontology.org/api/v2/diseases')
   .then(response => response.json())
   .then(data => {
