@@ -23,10 +23,10 @@
         <div class="flex justify-center">
             <div class="flex flex-col w-1/2 p-4 mt-4">
                 <div class="flex justify-center">
-                    <input class="w-1/2 p-2 rounded border border-gray-300" type="number" id="taille" placeholder="Taille en cm">
+                    <input class="w-1/2 p-2 rounded border border-gray-300" type="number" id="taille" aria-label="Taille en cm">
                     <span class="ml-2 text-lg">cm</span>
                 </div>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-auto mt-4" onclick="redirectTo('../html/resultats.html'), recoverTaille()">Valider</button>
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-auto mt-4" onclick=" recoverTaille(), redirectToListeResultats()">Valider</button>
             </div>
         </div>
     </div>

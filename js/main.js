@@ -129,6 +129,7 @@ function regrouperInformations() {
     bpm: localStorage.getItem("bpm"),
     temperature: localStorage.getItem("temperature"),
     gluco: localStorage.getItem("gluco"),
+    sexe: document.getElementById("sexe").innerHTML,
     symptomes: [],
   };
 
@@ -141,61 +142,87 @@ function regrouperInformations() {
 }
 
 function diagnostic() {
-  const apikey =
-    "";
-  const url = "https://api.openai.com/v1/chat/completions";
-  const informations = regrouperInformations();
+  return new Promise((resolve, reject) => {
+    const url = "https://api.openai.com/v1/chat/completions";
+    const informations = regrouperInformations();
+    const apikey = "";
 
-  fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${apikey}`,
-    },
-    body: JSON.stringify({
-      model: "gpt-4o-mini",
-      messages: [
-        {
-          role: "system",
-          content: [
-            {
-              type: "text",
-              text: `
-                "Je vais te fournir des informations médicales sur un patient. 
-                En fonction de ces informations, je souhaite que tu établisses un diagnostic 
-                et que tu me proposes des suspicions de maladie ainsi que des conseils de traitement. 
-                Il est important de noter que je veux une réponse sous forme de chaîne de caractères pure, 
-                sans mise en forme en markdown. Et il faut que tu t'adresse au patient en le vouvoyant.
-              `,
-            },
-          ],
-        },
-        {
-          role: "user",
-          content:
-            "Voici les informations du patient : " +
-            JSON.stringify(informations),
-        },
-      ],
-      max_tokens: 2048,
-      temperature: 0.7,
-    }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      const message = data.choices[0].message;
-      console.log("Output:", message);
-      const messageString = JSON.stringify(message);
-      const cleanedMessage = clarifierReponse(messageString);
-      const conseilElement = document.getElementById("conseil");
-
-      conseilElement.innerHTML = cleanedMessage;
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apikey}`,
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content: [
+              {
+                type: "text",
+                text: `
+                  "Je vais te fournir des informations médicales sur un patient. 
+                  En fonction de ces informations, je souhaite que tu établisses un diagnostic 
+                  et que tu me proposes des suspicions de maladie ainsi que des conseils de traitement. 
+                  Il est important de noter que je veux une réponse sous forme de chaîne de caractères pure, 
+                  sans mise en forme en markdown. Et il faut que tu t'adresse au patient en le vouvoyant.
+                `,
+              },
+            ],
+          },
+          {
+            role: "user",
+            content:
+              "Voici les informations du patient : " +
+              JSON.stringify(informations),
+          },
+        ],
+        max_tokens: 2048,
+        temperature: 0.7,
+      }),
     })
-    .catch((error) => console.error(error));
+      .then((response) => response.json())
+      .then((data) => {
+        const message = data.choices[0].message;
+        console.log("Output:", message);
+        const messageString = JSON.stringify(message);
+        const cleanedMessage = clarifierReponse(messageString);
+        const conseilElement = document.getElementById("conseil");
+
+        conseilElement.innerHTML = cleanedMessage;
+        resolve();
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
 
 function clarifierReponse(reponse) {
   const message = JSON.parse(reponse).content;
   const messageClarifie = message.replace(/\n/g, "<br><br>").replace(/\r/g, "");
   return messageClarifie;
+}
+
+// Dans la page resultats.html
+function redirectToResultats() {
+  const loaderElement = document.getElementById("loader");
+  const resultatsElement = document.getElementById("resultats");
+
+  loaderElement.style.display = "block";
+  resultatsElement.style.display = "none";
+
+  diagnostic().then(() => {
+    loaderElement.style.display = "none";
+    resultatsElement.style.display = "block";
+  });
+}
+
+window.onload = function() {
+  redirectToResultats();
+}
+
+function redirectToListeResultats() {
+  window.location.href = "../html/resultats.html";
 }

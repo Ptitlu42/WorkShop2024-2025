@@ -10,8 +10,21 @@
 </head>
 
 <body class="bg-gradient-to-r from-gray-50 to-green-100 h-screen border-l-4 border-green-500 border-r-8"
-  onload="afficherSymptomesCoches(), fetch_informations(), getTaille(), calculerIMC(), diagnostic()">
+  onload="afficherSymptomesCoches(), fetch_informations(), getTaille(), calculerIMC(), redirectToResultats()">
 
+  <div id="loader" class="bg-gradient-to-r from-gray-50 to-green-100 h-screen border-l-4 border-green-500 border-r-8" style="display: block;">
+    <header class="bg-gradient-to-r from-green-100 to-gray-50 p-4 text-4xl text-center">MEDICBOX</header>
+    <div class="h-screen flex items-center justify-center">
+        <div class="loader">
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
+            <div class="circle circle-3"></div>
+            <div class="circle circle-4"></div>
+        </div>
+    </div>
+
+</div>
+<div id="resultats" style="display: none;">
   <div class="bg-gradient-to-r from-green-100 to-gray-50 p-4 text-4xl text-center">MEDICBOX</div>
 
   <div class="container mx-auto p-4 pt-24">
@@ -80,11 +93,10 @@
   </div>
 
   <script>
-    // Récupérer les symptômes cochés
     const checkedSymptomes = JSON.parse(localStorage.getItem('checkedSymptomes'));
     console.log(checkedSymptomes);
   </script>
-
+</div>
 </body>
 
 </html>
