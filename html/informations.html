@@ -9,7 +9,7 @@
   <script src="../js/main.js"></script>
 </head>
 
-<body class="bg-gradient-to-r from-gray-50 to-green-100 h-screen border-l-4 border-green-500 border-r-8">
+<body class="bg-gradient-to-r from-gray-50 to-green-100 h-screen border-l-4 border-green-500 border-r-8" onload="fetch_informations()">
 
   <div class="bg-gradient-to-r from-green-100 to-gray-50 p-4 text-4xl text-center">MEDICBOX</div>
 
@@ -50,7 +50,7 @@
       </div>
       <div class="flex flex-col w-full sm:w-1/2 mt-4">
         <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full" id="confirmer"
-          onclick="redirect_to_symptomes()">Confirmer ces informations</button>
+          onclick="redirectTo('../html/symptomes.html')">Confirmer ces informations</button>
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full mt-2"
           id="modifier">Modifier ces informations</button>
       </div>
