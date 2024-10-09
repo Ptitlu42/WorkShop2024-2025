@@ -17,22 +17,22 @@
   }
   
   .circle-1 {
-    width: 60px;
-    height: 60px;
+    width: 600px;
+    height: 600px;
     background: linear-gradient(109.8deg, rgba(52, 248, 35, 0.1855) 0%, rgba(68, 253, 38, 0.196) 100%);
     animation-name: circle-1-animation;
   }
   
   .circle-3 {
-    width: 40px;
-    height: 40px;
+    width: 400px;
+    height: 400px;
     background: linear-gradient(109.8deg, rgba(52, 248, 35, 0.265) 0%, rgba(68, 253, 38, 0.28) 100%);
     animation-name: circle-3-animation;
   }
   
   .circle-4 {
-    width: 20px;
-    height: 20px;
+    width: 200px;
+    height: 200px;
     background: linear-gradient(109.8deg, rgba(52, 248, 35, 0.265) 0%, rgba(68, 253, 38, 0.28) 100%);
     animation-name: circle-4-animation;
   }

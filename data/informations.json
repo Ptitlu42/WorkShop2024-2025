@@ -2,7 +2,5 @@
     "nom": "John Doe",
     "prenom": "John",
     "dateNaissance": "1998-30-07",
-    "taille": "180 cm",
-    "poids": "70 kg",
-    "age": "26 ans"
+    "sexe": "Féminin"
   }

@@ -5,13 +5,27 @@ function fetch_informations() {
       document.getElementById("nom").innerHTML = data.nom;
       document.getElementById("prenom").innerHTML = data.prenom;
       document.getElementById("dateNaissance").innerHTML = data.dateNaissance;
-      document.getElementById("taille").innerHTML = data.taille;
-      document.getElementById("poids").innerHTML = data.poids;
-      document.getElementById("age").innerHTML = data.age;
+      document.getElementById("sexe").innerHTML = data.sexe;
+      const taille = localStorage.getItem("taille");
+      document.getElementById("taille").innerHTML =
+        "Taille : " + taille + " cm";
+      const poids = localStorage.getItem("poids");
+      document.getElementById("poids").innerHTML = "Poids : " + poids + " kg";
+      const bpm = localStorage.getItem("bpm");
+      document.getElementById("bpm").innerHTML = "BPM : " + bpm;
+      const temperature = localStorage.getItem("temperature");
+      document.getElementById("temperature").innerHTML =
+        "Temperature : " + temperature + "°";
+      const gluco = localStorage.getItem("gluco");
+      document.getElementById("gluco").innerHTML =
+        "Glycemie : " + gluco + " mg/dl";
+
+      const informations = regrouperInformations();
+      console.log("informations :", informations);
     });
 }
 
-function fetch_symptome() {
+function fetch_symptomes() {
   fetch("../data/symptomes.json")
     .then((response) => response.json())
     .then((data) => {
@@ -19,11 +33,13 @@ function fetch_symptome() {
       data.forEach((symptome, index) => {
         const li = document.createElement("li");
         li.innerHTML = `
-          <input type="checkbox" id="symptome-${index}" name="${symptome.nom}">
+          <input type="checkbox" id="symptome-${index}" name="${symptome.nom}" value="${symptome.nom}">
           <label for="symptome-${index}">${symptome.nom}</label>
         `;
         symptomes.appendChild(li);
       });
+
+      symptomes.addEventListener("change", updateLocalStorage);
     });
 }
 
@@ -36,40 +52,14 @@ function notifierMedecin() {
 }
 
 function afficherSymptomesCoches() {
-  const symptomesCoches = JSON.parse(localStorage.getItem("symptomesCoches"));
+  const checkedSymptomes = JSON.parse(localStorage.getItem("checkedSymptomes"));
   const symptomesCochesDiv = document.getElementById("symptomes-coches");
-
-  if (symptomesCochesDiv) {
-    if (symptomesCoches) {
-      symptomesCoches.forEach((symptome) => {
-        const p = document.createElement("p");
-        p.textContent = symptome;
-        symptomesCochesDiv.appendChild(p);
-      });
-    }
-  } else {
-    console.log("L'élément symptomes-coches n'est pas disponible");
-  }
+  checkedSymptomes.forEach((symptome) => {
+    const p = document.createElement("p");
+    p.textContent = symptome;
+    symptomesCochesDiv.appendChild(p);
+  });
 }
-// fetch(
-//   "https://cors-anywhere.herokuapp.com/https://api.disease-ontology.org/api/v2/diseases"
-// )
-//   .then((response) => response.json())
-//   .then((data) => {
-//     const diseasesElement = document.getElementById("diseases");
-
-//     data.forEach((disease) => {
-//       const diseaseElement = document.createElement("div");
-//       diseaseElement.innerHTML = `
-//         <h2>${disease.name}</h2>
-//         <ul>
-//           ${disease.symptoms.map((symptom) => `<li>${symptom}</li>`).join("")}
-//         </ul>
-//       `;
-//       diseasesElement.appendChild(diseaseElement);
-//     });
-//   })
-//   .catch((error) => console.error(error));
 
 function redirectTo(url) {
   window.location.href = "../html/loader.html?url=" + encodeURIComponent(url);
@@ -79,5 +69,133 @@ var url = new URLSearchParams(window.location.search).get("url");
 if (url !== null && url !== undefined && url !== "") {
   setTimeout(() => {
     window.location.href = url;
-  }, 4000);
+  }, 1500);
+}
+
+function updateLocalStorage() {
+  const checkedSymptomes = [];
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach((checkbox) => {
+    if (checkbox.checked) {
+      checkedSymptomes.push(checkbox.value);
+    }
+  });
+  localStorage.setItem("checkedSymptomes", JSON.stringify(checkedSymptomes));
+}
+
+function recoverTaille() {
+  const tailleInput = document.getElementById("taille");
+  const taille = tailleInput.value;
+  localStorage.setItem("taille", taille);
+}
+
+function getTaille() {
+  const taille = localStorage.getItem("taille");
+  document.getElementById("taille").innerHTML = taille + " cm";
+}
+
+function calculerIMC() {
+  const poids = localStorage.getItem("poids");
+  const taille = localStorage.getItem("taille") / 100;
+  const imc = poids / (taille * taille);
+  document.getElementById("IMC").innerHTML = "IMC : " + imc.toFixed(2);
+}
+
+function randomPoids() {
+  const poids = Math.floor(Math.random() * (100 - 35 + 1)) + 35;
+  localStorage.setItem("poids", poids);
+}
+
+function randomBPM() {
+  const bpm = Math.floor(Math.random() * (250 - 20 + 1)) + 20;
+  localStorage.setItem("bpm", bpm);
+}
+
+function randomTemperature() {
+  const temperature = Math.floor(Math.random() * (45 - 32 + 1)) + 32;
+  localStorage.setItem("temperature", temperature);
+}
+
+function randomGluco() {
+  const gluco = Math.floor(Math.random() * (300 - 40 + 1)) + 40;
+  localStorage.setItem("gluco", gluco);
+}
+
+function regrouperInformations() {
+  const informations = {
+    dateNaissance: document.getElementById("dateNaissance").innerHTML,
+    taille: localStorage.getItem("taille"),
+    poids: localStorage.getItem("poids"),
+    bpm: localStorage.getItem("bpm"),
+    temperature: localStorage.getItem("temperature"),
+    gluco: localStorage.getItem("gluco"),
+    symptomes: [],
+  };
+
+  const checkedSymptomes = JSON.parse(localStorage.getItem("checkedSymptomes"));
+  checkedSymptomes.forEach((symptome) => {
+    informations.symptomes.push(symptome);
+  });
+
+  return informations;
+}
+
+function diagnostic() {
+  const apikey =
+    "";
+  const url = "https://api.openai.com/v1/chat/completions";
+  const informations = regrouperInformations();
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apikey}`,
+    },
+    body: JSON.stringify({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content: [
+            {
+              type: "text",
+              text: `
+                "Je vais te fournir des informations médicales sur un patient. 
+                En fonction de ces informations, je souhaite que tu établisses un diagnostic 
+                et que tu me proposes des suspicions de maladie ainsi que des conseils de traitement. 
+                Il est important de noter que je veux une réponse sous forme de chaîne de caractères pure, 
+                sans mise en forme en markdown. Et il faut que tu t'adresse au patient en le vouvoyant.
+              `,
+            },
+          ],
+        },
+        {
+          role: "user",
+          content:
+            "Voici les informations du patient : " +
+            JSON.stringify(informations),
+        },
+      ],
+      max_tokens: 2048,
+      temperature: 0.7,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const message = data.choices[0].message;
+      console.log("Output:", message);
+      const messageString = JSON.stringify(message);
+      const cleanedMessage = clarifierReponse(messageString);
+      const conseilElement = document.getElementById("conseil");
+
+      conseilElement.innerHTML = cleanedMessage;
+    })
+    .catch((error) => console.error(error));
+}
+
+function clarifierReponse(reponse) {
+  const message = JSON.parse(reponse).content;
+  const messageClarifie = message.replace(/\n/g, "<br><br>").replace(/\r/g, "");
+  return messageClarifie;
 }
