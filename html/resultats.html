@@ -3,6 +3,7 @@
 
 <head>
   <title>Borne</title>
+  <link rel="icon" type="image/x-icon" href="../assets/icon.ico">
   <meta charset="utf-8">
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../css/main.css">
@@ -10,7 +11,7 @@
 </head>
 
 <body class="bg-gradient-to-r from-gray-50 to-green-100 h-screen border-l-4 border-green-500 border-r-8"
-  onload="afficherSymptomesCoches(), fetch_informations(), getTaille(), calculerIMC(), redirectToResultats()">
+  onload="afficherSymptomesCoches(), afficherCommentaire(), fetch_informations(), getTaille(), calculerIMC(), redirectToResultats()">
 
   <div id="loader" class="bg-gradient-to-r from-gray-50 to-green-100 h-screen border-l-4 border-green-500 border-r-8" style="display: block;">
     <header class="bg-gradient-to-r from-green-100 to-gray-50 p-4 text-4xl text-center">MEDICBOX</header>
@@ -68,6 +69,11 @@
       <div class="flex flex-col w-full sm:w-1/2 p-4 bg-white rounded-lg shadow-lg mt-4">
         <h3 class="text-2xl font-bold">Symptômes:</h3>
         <div id="symptomes-coches"></div>
+      </div>
+
+      <div class="flex flex-col w-full sm:w-1/2 p-4 bg-white rounded-lg shadow-lg mt-4">
+        <h3 class="text-2xl font-bold">Commentaire:</h3>
+        <div id="commentaire-patient"></div>
       </div>
 
       <div class="flex flex-col w-full sm:w-1/2 p-4 bg-white rounded-lg shadow-lg mt-4">
