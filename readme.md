@@ -1,5 +1,7 @@
 # 🏥 Workshop Project: Front-end Prototype for Medical Examination Terminal
+![alt text](image-2.png)
 ![alt text](image.png)
+![alt text](image-1.png)
 ## 🎯 Goal
 
 The goal of this project is to create a front-end prototype for a medical examination terminal that could help combat medical deserts. 💡

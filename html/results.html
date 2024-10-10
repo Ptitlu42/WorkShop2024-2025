@@ -11,97 +11,105 @@
 </head>
 
 <body class="bg-gradient-to-r from-gray-50 to-green-100 h-screen border-l-4 border-green-500 border-r-8"
-  onload="view_symptoms(), view_comments(), fetch_informations(), insert_size(), IMC_calculator(), redirect_to_results()">
-
-  <div id="loader" class="bg-gradient-to-r from-gray-50 to-green-100 h-screen border-l-4 border-green-500 border-r-8" style="display: block;">
+  onload="view_symptoms(), view_comments(), fetch_informations(), insert_size(), IMC_calculator(), redirect_to_results(), display_results()">
+  <div id="loader" class="bg-gradient-to-r from-gray-50 to-green-100 h-screen border-l-4 border-green-500 border-r-8"
+    style="display: block;">
     <header class="bg-gradient-to-r from-green-100 to-gray-50 p-4 text-4xl text-center">MEDICBOX</header>
     <div class="h-screen flex items-center justify-center">
-        <div class="loader">
-            <div class="circle circle-1"></div>
-            <div class="circle circle-2"></div>
-            <div class="circle circle-3"></div>
-            <div class="circle circle-4"></div>
-        </div>
+      <div class="loader">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+        <div class="circle circle-4"></div>
+      </div>
     </div>
-
-</div>
-<div id="resultats" style="display: none;">
-  <div class="bg-gradient-to-r from-green-100 to-gray-50 p-4 text-4xl text-center">MEDICBOX</div>
-
-  <div class="container mx-auto p-4 pt-24">
-    <div class="flex flex-col justify-center items-center">
-      <div class="flex flex-col w-full sm:w-1/2 p-4 bg-white rounded-lg shadow-lg mt-4">
-        <div class="flex justify-center">
-          <img class="w-32 h-32 rounded-full" src="../assets/avatar.png" alt="Photo" id="photo">
+  </div>
+  <div id="resultats" style="display: none;">
+    <div class="bg-gradient-to-r from-green-100 to-gray-50 p-4 text-4xl text-center">MEDICBOX</div>
+    <div class="container mx-auto p-4 pt-24">
+      <div class="flex flex-col justify-center items-center">
+        <div class="flex flex-col w-full sm:w-1/2 p-4 bg-white rounded-lg shadow-lg mt-4">
+          <div class="flex justify-center">
+            <img class="w-32 h-32 rounded-full" src="../assets/avatar.png" alt="Photo" id="photo">
+          </div>
+          <div class="flex flex-col mt-4">
+            <div class="flex justify-between">
+              <p class="text-2xl font-bold">Nom :</p>
+              <p class="text-2xl font-thin" id="nom"></p>
+            </div>
+            <div class="flex justify-between mt-2">
+              <p class="text-2xl font-bold">Prénom :</p>
+              <p class="text-2xl font-thin" id="prenom"></p>
+            </div>
+            <div class="flex justify-between mt-2">
+              <p class="text-2xl font-bold">Date de naissance :</p>
+              <p class="text-2xl font-thin" id="dateNaissance"></p>
+            </div>
+            <div class="flex justify-between mt-2">
+              <p class="text-2xl font-bold">Sexe :</p>
+              <p class="text-2xl font-thin" id="sexe"></p>
+            </div>
+          </div>
         </div>
-        <div class="flex flex-col mt-4">
-          <div class="flex justify-between">
-            <p class="text-2xl font-bold">Nom :</p>
-            <p class="text-2xl font-thin" id="nom"></p>
-          </div>
-          <div class="flex justify-between mt-2">
-            <p class="text-2xl font-bold">Prénom :</p>
-            <p class="text-2xl font-thin" id="prenom"></p>
-          </div>
-          <div class="flex justify-between mt-2">
-            <p class="text-2xl font-bold">Date de naissance :</p>
-            <p class="text-2xl font-thin" id="dateNaissance"></p>
-          </div>
-          <div class="flex justify-between mt-2">
-            <p class="text-2xl font-bold">Sexe :</p>
-            <p class="text-2xl font-thin" id="sexe"></p>
+
+        <div class="flex flex-col w-full sm:w-1/2 p-4 bg-white rounded-lg shadow-lg mt-4">
+          <h3 class="text-2xl font-bold">Maladie chronique:</h3>
+          <p class="text-2xl font-thin" id="maladie-result"></p>
+          <p class="text-2xl font-bold">Traitement :</p>
+          <p class="text-2xl font-thin" id="traitement-result"></p>
+          <p class="text-2xl font-bold">Enceinte :</p>
+          <p class="text-2xl font-thin" id="enceinte-result"></p>
+          <p class="text-2xl font-bold">Addictions :</p>
+          <p class="text-2xl font-thin" id="addictions-result"></p>
+          <p class="text-2xl font-bold">Allergies :</p>
+          <p class="text-2xl font-thin" id="allergies-result"></p>
+          <p class="text-2xl font-bold">Pacemaker :</p>
+          <p class="text-2xl font-thin" id="pacemaker-result"></p>
+        </div>
+
+        <div class="flex flex-col w-full sm:w-1/2 p-4 bg-white rounded-lg shadow-lg mt-4">
+          <h3 class="text-2xl font-bold">Résultats des tests</h3>
+          <div class="flex flex-col mt-2">
+            <p class="text-lg" id="gluco"></p>
+            <p class="text-lg" id="poids"></p>
+            <p class="text-lg" id="bpm"></p>
+            <p class="text-lg" id="temperature"></p>
+            <p class="text-lg" id="taille"></p>
+            <p class="text-lg" id="IMC"></p>
           </div>
         </div>
-      </div>
 
-      <div class="flex flex-col w-full sm:w-1/2 p-4 bg-white rounded-lg shadow-lg mt-4">
-        <h3 class="text-2xl font-bold">Résultats des tests</h3>
-        <div class="flex flex-col mt-2">
-          <p class="text-lg" id="gluco"></p>
-          <p class="text-lg" id="poids"></p>
-          <p class="text-lg" id="bpm"></p>
-          <p class="text-lg" id="temperature"></p>
-          <p class="text-lg" id="taille"></p>
-          <p class="text-lg" id="IMC"></p>
+        <div class="flex flex-col w-full sm:w-1/2 p-4 bg-white rounded-lg shadow-lg mt-4">
+          <h3 class="text-2xl font-bold">Symptômes:</h3>
+          <div id="symptomes-coches"></div>
         </div>
-      </div>
 
-      <div class="flex flex-col w-full sm:w-1/2 p-4 bg-white rounded-lg shadow-lg mt-4">
-        <h3 class="text-2xl font-bold">Symptômes:</h3>
-        <div id="symptomes-coches"></div>
-      </div>
+        <div class="flex flex-col w-full sm:w-1/2 p-4 bg-white rounded-lg shadow-lg mt-4">
+          <h3 class="text-2xl font-bold">Commentaire:</h3>
+          <div id="commentaire-patient"></div>
+        </div>
 
-      <div class="flex flex-col w-full sm:w-1/2 p-4 bg-white rounded-lg shadow-lg mt-4">
-        <h3 class="text-2xl font-bold">Commentaire:</h3>
-        <div id="commentaire-patient"></div>
-      </div>
+        <div class="flex flex-col w-full sm:w-1/2 p-4 bg-white rounded-lg shadow-lg mt-4">
+          <h3 class="text-2xl font-bold">Conseils:</h3>
+          <p class="text-lg" id="conseil"></p>
+        </div>
 
-      <div class="flex flex-col w-full sm:w-1/2 p-4 bg-white rounded-lg shadow-lg mt-4">
-        <h3 class="text-2xl font-bold">Conseils:</h3>
-        <p class="text-lg" id="conseil"></p>
-      </div>
-
-
-      <div class="flex flex-col w-full sm:w-1/2 p-4 mt-4">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onclick="print_results()">Imprimer mes résultats</button>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
-          onclick="doctor_mail()">Envoyer les résultat à mon médecin</button>
-        <div class="flex flex-col mt-4">
-          <label for="email" class="text-lg">Recevoir mes résultats par email :</label>
-          <input type="email" id="email" class="p-2 rounded border border-gray-300"
-            placeholder="Entrez votre adresse email">
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">Envoyer</button>
+        <div class="flex flex-col w-full sm:w-1/2 p-4 mt-4">
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onclick="print_results()">Imprimer mes résultats</button>
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+            onclick="doctor_mail()">Envoyer les résultat à mon médecin</button>
+          <div class="flex flex-col mt-4">
+            <label for="email" class="text-lg">Recevoir mes résultats par email :</label>
+            <input type="email" id="email" class="p-2 rounded border border-gray-300"
+              placeholder="Entrez votre adresse email">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">Envoyer</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <script>
-    const checkedSymptomes = JSON.parse(localStorage.getItem('checkedSymptomes'));
-    console.log(checkedSymptomes);
-  </script>
-</div>
 </body>
 
 </html>
+

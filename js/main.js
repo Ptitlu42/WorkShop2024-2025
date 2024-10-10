@@ -21,7 +21,6 @@ function fetch_informations() {
         "Glycemie : " + gluco + " mg/dl";
 
       const informations = group_informations();
-      console.log("informations :", informations);
     });
 }
 
@@ -138,6 +137,16 @@ function group_informations() {
     symptomes: [],
     commentaire: localStorage.getItem("commentaire"),
     age: age_calculate(document.getElementById("dateNaissance").innerHTML),
+    traitement: localStorage.getItem("traitement"),
+    traitementInput: localStorage.getItem("traitement-input"),
+    enceinte: localStorage.getItem("enceinte"),
+    addictions: localStorage.getItem("addictions"),
+    addictionsInput: localStorage.getItem("addictions-input"),
+    allergies: localStorage.getItem("allergies"),
+    allergiesInput: localStorage.getItem("allergies-input"),
+    pacemaker: localStorage.getItem("pacemaker"),
+    maladie: localStorage.getItem("maladie"),
+    maladieInput: localStorage.getItem("maladie-input"),
   };
 
 
@@ -172,12 +181,16 @@ function diagnostic() {
               {
                 type: "text",
                 text: `
-                  "Je vais te fournir des informations médicales sur un patient, des valeurs, 
-                  son profil, ainsi qu'un commentaire de sa part. 
-                  En fonction de ces informations, je souhaite que tu établisses un diagnostic 
-                  et que tu me proposes des suspicions de maladie ainsi que des conseils. 
-                  Il est important de noter que je veux une réponse sous forme de chaîne de caractères pure, 
-                  sans mise en forme en markdown. Et il faut que tu t'adresse au patient en le vouvoyant.
+                  N'UTILISE PAS DE MARKDOWN
+                  Je vais vous fournir des informations médicales détaillées sur un patient, 
+                  y compris ses valeurs de santé, son profil médical, ses allergies, 
+                  traitements en cours, présence d'un pacemaker, 
+                  addictions et un commentaire personnel. En fonction de ces informations, 
+                  je souhaite que vous établissiez un diagnostic précis 
+                  et que vous proposiez des suspicions de maladie ainsi que des conseils de traitement. 
+                  Il est essentiel de fournir une réponse sous forme de texte brut, sans mise en forme en markdown. 
+                  De plus, veuillez vous adresser au patient en utilisant le vouvoiement.
+                  N'UTILISE PAS DE MARKDOWN
                 `,
               },
             ],
@@ -196,7 +209,6 @@ function diagnostic() {
       .then((response) => response.json())
       .then((data) => {
         const message = data.choices[0].message;
-        console.log("Output:", message);
         const messageString = JSON.stringify(message);
         const cleanedMessage = format_response(messageString);
         const conseilElement = document.getElementById("conseil");
@@ -287,4 +299,54 @@ function age_calculate(dateNaissance) {
     age--;
   }
   return age;
+}
+
+function save_questionnaire() {
+  const traitement = document.querySelector('input[name="traitement"]:checked').value;
+  const traitementInput = document.getElementById("traitement-input").value;
+  const enceinte = document.querySelector('input[name="enceinte"]:checked').value;
+  const addictions = document.querySelector('input[name="addictions"]:checked').value;
+  const addictionsInput = document.getElementById("addictions-input").value;
+  const allergies = document.querySelector('input[name="allergies"]:checked').value;
+  const allergiesInput = document.getElementById("allergies-input").value;
+  const pacemaker = document.querySelector('input[name="pacemaker"]:checked').value;
+  const maladie = document.querySelector('input[name="maladie"]:checked').value;
+  const maladieInput = document.getElementById("maladie-input").value;
+
+  localStorage.setItem("traitement", traitement);
+  localStorage.setItem("traitement-input", traitementInput);
+  localStorage.setItem("enceinte", enceinte);
+  localStorage.setItem("addictions", addictions);
+  localStorage.setItem("addictions-input", addictionsInput);
+  localStorage.setItem("allergies", allergies);
+  localStorage.setItem("allergies-input", allergiesInput);
+  localStorage.setItem("pacemaker", pacemaker);
+  localStorage.setItem("maladie", maladie);
+  localStorage.setItem("maladie-input", maladieInput);
+
+}
+
+function display_results() {
+  const traitement = localStorage.getItem("traitement");
+  const traitementInput = localStorage.getItem("traitement-input");
+  const enceinte = localStorage.getItem("enceinte");
+  const addictions = localStorage.getItem("addictions");
+  const addictionsInput = localStorage.getItem("addictions-input");
+  const allergies = localStorage.getItem("allergies");
+  const allergiesInput = localStorage.getItem("allergies-input");
+  const pacemaker = localStorage.getItem("pacemaker");
+  const maladie = localStorage.getItem("maladie");
+  const maladieInput = localStorage.getItem("maladie-input");
+
+  const displayTraitement = traitement + (traitementInput ? " / " + traitementInput : "");
+  const displayAddictions = addictions + (addictionsInput ? " / " + addictionsInput : "");
+  const displayAllergies = allergies + (allergiesInput ? " / " + allergiesInput : "");
+  const displayMaladie = maladie + (maladieInput ? " / " + maladieInput : "");
+
+  document.getElementById("traitement-result").innerHTML = displayTraitement;
+  document.getElementById("enceinte-result").innerHTML = enceinte;
+  document.getElementById("addictions-result").innerHTML = displayAddictions;
+  document.getElementById("allergies-result").innerHTML = displayAllergies;
+  document.getElementById("pacemaker-result").innerHTML = pacemaker;
+  document.getElementById("maladie-result").innerHTML = displayMaladie;
 }
