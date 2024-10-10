@@ -20,20 +20,20 @@ function fetch_informations() {
       document.getElementById("gluco").innerHTML =
         "Glycemie : " + gluco + " mg/dl";
 
-      const informations = regrouperInformations();
+      const informations = group_informations();
       console.log("informations :", informations);
     });
 }
 
-function imprimerResultats() {
+function print_results() {
   window.print();
 }
 
-function notifierMedecin() {
+function doctor_mail() {
   alert("Résultats envoyés au medecin");
 }
 
-function afficherSymptomesCoches() {
+function view_symptoms() {
   const checkedSymptomes = JSON.parse(localStorage.getItem("checkedSymptomes"));
   const symptomesCochesDiv = document.getElementById("symptomes-coches");
   checkedSymptomes.forEach((symptome) => {
@@ -43,13 +43,13 @@ function afficherSymptomesCoches() {
   });
 }
 
-function afficherCommentaire() {
+function view_comments() {
   const commentaireInput = document.getElementById("commentaire-patient");
   const commentaire = localStorage.getItem("commentaire");
   commentaireInput.value = commentaire;
 }
 
-function redirectTo(url) {
+function redirect_to(url) {
   window.location.href = "../html/loader.html?url=" + encodeURIComponent(url);
 }
 
@@ -60,7 +60,7 @@ if (url !== null && url !== undefined && url !== "") {
   }, 1500);
 }
 
-function updateLocalStorage() {
+function update_local_storage() {
   const checkedSymptomes = [];
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
   checkboxes.forEach((checkbox) => {
@@ -71,62 +71,62 @@ function updateLocalStorage() {
   localStorage.setItem("checkedSymptomes", JSON.stringify(checkedSymptomes));
 }
 
-function recoverTaille() {
+function get_size() {
   const tailleInput = document.getElementById("taille");
   const taille = tailleInput.value;
   localStorage.setItem("taille", taille);
 }
 
-function recoverCommentaire() {
+function get_comment() {
   const commentaireInput = document.getElementById("commentaire");
   const commentaire = commentaireInput.value;
   localStorage.setItem("commentaire", commentaire);
 }
 
-function getCommentaire() {
+function insert_comment() {
   const commentaire = localStorage.getItem("commentaire");
   document.getElementById("commentaire").innerHTML = commentaire;
 }
 
-function afficherCommentaire() {
+function view_comments() {
   const commentaire = localStorage.getItem("commentaire");
   const commentaireElement = document.getElementById("commentaire-patient");
   commentaireElement.innerHTML = commentaire;
 }
 
-function getTaille() {
+function insert_size() {
   const taille = localStorage.getItem("taille");
   document.getElementById("taille").innerHTML = taille + " cm";
 }
 
-function calculerIMC() {
+function IMC_calculator() {
   const poids = localStorage.getItem("poids");
   const taille = localStorage.getItem("taille") / 100;
   const imc = poids / (taille * taille);
   document.getElementById("IMC").innerHTML = "IMC : " + imc.toFixed(2);
 }
 
-function randomPoids() {
+function random_weight() {
   const poids = Math.floor(Math.random() * (90 - 45 + 1)) + 45;
   localStorage.setItem("poids", poids);
 }
 
-function randomBPM() {
+function random_BPM() {
   const bpm = Math.floor(Math.random() * (100 - 60 + 1)) + 60;
   localStorage.setItem("bpm", bpm);
 }
 
-function randomTemperature() {
+function random_temp() {
   const temperature = Math.floor(Math.random() * (40 - 36 + 1)) + 36;
   localStorage.setItem("temperature", temperature);
 }
 
-function randomGluco() {
+function random_gluc() {
   const gluco = Math.floor(Math.random() * (220 - 90 + 1)) + 90;
   localStorage.setItem("gluco", gluco);
 }
 
-function regrouperInformations() {
+function group_informations() {
   const informations = {
     dateNaissance: document.getElementById("dateNaissance").innerHTML,
     taille: localStorage.getItem("taille"),
@@ -137,7 +137,7 @@ function regrouperInformations() {
     sexe: document.getElementById("sexe").innerHTML,
     symptomes: [],
     commentaire: localStorage.getItem("commentaire"),
-    age: calculerAge(document.getElementById("dateNaissance").innerHTML),
+    age: age_calculate(document.getElementById("dateNaissance").innerHTML),
   };
 
 
@@ -153,7 +153,7 @@ function regrouperInformations() {
 function diagnostic() {
   return new Promise((resolve, reject) => {
     const url = "https://api.openai.com/v1/chat/completions";
-    const informations = regrouperInformations();
+    const informations = group_informations();
     const apikey =
       "";
 
@@ -198,7 +198,7 @@ function diagnostic() {
         const message = data.choices[0].message;
         console.log("Output:", message);
         const messageString = JSON.stringify(message);
-        const cleanedMessage = clarifierReponse(messageString);
+        const cleanedMessage = format_response(messageString);
         const conseilElement = document.getElementById("conseil");
 
         conseilElement.innerHTML = cleanedMessage;
@@ -210,13 +210,13 @@ function diagnostic() {
   });
 }
 
-function clarifierReponse(reponse) {
+function format_response(reponse) {
   const message = JSON.parse(reponse).content;
   const messageClarifie = message.replace(/\n/g, "<br><br>").replace(/\r/g, "");
   return messageClarifie;
 }
 
-function redirectToResultats() {
+function redirect_to_results() {
   const loaderElement = document.getElementById("loader");
   const resultatsElement = document.getElementById("resultats");
 
@@ -230,11 +230,11 @@ function redirectToResultats() {
 }
 
 window.onload = function () {
-  redirectToResultats();
+  redirect_to_results();
 };
 
-function redirectToListeResultats() {
-  window.location.href = "../html/resultats.html";
+function redirect_to_list_results() {
+  window.location.href = "../html/results.html";
 }
 
 function fetch_symptomes() {
@@ -254,7 +254,7 @@ function fetch_symptomes() {
       const checkboxes = document.querySelectorAll('input[type="checkbox"]');
       checkboxes.forEach((checkbox) => {
         checkbox.addEventListener("change", () => {
-          updateLocalStorage();
+          update_local_storage();
         });
       });
 
@@ -278,7 +278,7 @@ function fetch_symptomes() {
     });
 }
 
-function calculerAge(dateNaissance) {
+function age_calculate(dateNaissance) {
   const today = new Date();
   const birthDate = new Date(dateNaissance);
   let age = today.getFullYear() - birthDate.getFullYear();
