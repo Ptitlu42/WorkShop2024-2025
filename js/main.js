@@ -225,7 +225,8 @@ function diagnostic() {
 function format_response(reponse) {
   const message = JSON.parse(reponse).content;
   const messageClarifie = message.replace(/\n/g, "<br><br>").replace(/\r/g, "");
-  return messageClarifie;
+  const messageWithoutStars = messageClarifie.replace(/\*\*/g, "").replace(/\*/g, "");
+  return messageWithoutStars;
 }
 
 function redirect_to_results() {
